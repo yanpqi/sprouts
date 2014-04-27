@@ -1,0 +1,17 @@
+#!/bin/bash
+# system infomation database to descript your origin system envirement.
+
+if [ "$sys_info" ]; then
+	return;
+fi
+set sys_info = $0
+
+UBUNTUS=("14.04" "13.10" "13.04" "12.10" "12.04" "11.10" "11.04" "10.10" "10.04" "9.10" "9.04" "8.10" "8.04" "7.10" "7.04" "6.10" "6.06" "5.10" "5.04" "4.10")
+UBUNTU_CODES=("trusty" "saucy" "raring" "quantal" "precise" "oneiric" "natty" "maverick" "lucid" "karmic" "jaunty" "intrepid" "hardy" "gutsy" "feisty" "edgy" "dapper" "breezy" "hoary" "warty")
+UNITY_START="11.04"
+
+SPR_OS_PLATFORM=`uname -m`
+SPR_DISTRIB_TYPE=`cat /etc/lsb-release |grep "DISTRIB_ID"|sed s/DISTRIB_ID=//`
+SPR_DISTRIB_VERSION=`cat /etc/lsb-release |grep "DISTRIB_RELEASE"|sed s/DISTRIB_RELEASE=//`
+SPR_DISTRIB_RELEASE_CODE=`cat /etc/lsb-release |grep "DISTRIB_CODENAME"|sed s/DISTRIB_CODENAME=//`
+SPR_DISTRIB_KERNEL=

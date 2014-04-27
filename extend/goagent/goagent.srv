@@ -1,0 +1,90 @@
+ #! /bin/sh
+ # Author: lazycat
+ # your can visit lazycat's site
+ # @http://edrun.github.io/lazycat/2013/05/08/ubuntu-longe-goagent.html
+
+ ### BEGIN INIT INFO
+ # Provides:          goagent
+ # Required-Start:    $remote_fs $all
+ # Required-Stop:
+ # Default-Start:     2 3 4 5
+ # Default-Stop:
+ # Short-Description: goagent daemon
+ ### END INIT INFO
+ 
+ 
+ PATH=/sbin:/usr/sbin:/bin:/usr/bin
+ NAME=goagent
+ DAEMON=/opt/goagent/goagent/local/proxy.py
+ PIDFILE=/var/run/$NAME.pid
+ 
+ . /lib/init/vars.sh
+ . /lib/lsb/init-functions
+ 
+ do_start()
+ {
+   if [ -f $PIDFILE ]; then
+     start-stop-daemon --pidfile $PIDFILE  --status
+     case "$?" in
+       0)
+         echo "$NAME is running !"
+         return  0
+         ;;
+       1|3)
+         #nothing to do
+         ;;
+       *)
+         echo "unable to determine status !"
+         return  1
+       ;;
+     esac
+   fi
+   echo "starting $NAME ..."
+   start-stop-daemon --start --quiet  --background --oknodo  --exec  $DAEMON --make-pidfile --pidfile $PIDFILE    
+   echo 'done.'
+   return  0
+ }
+ 
+ do_stop()
+ {
+  echo "stopping $NAME ..."
+  if [ -f $PIDFILE ]; then
+     start-stop-daemon --stop --quiet  --oknodo --pidfile $PIDFILE
+     rm -f $PIDFILE
+  fi
+  echo 'done.'
+ }
+ 
+ do_status()
+ {
+    start-stop-daemon --pidfile $PIDFILE  --status 
+    case "$?" in
+      0) 
+     echo "$NAME is running!"
+     ;;
+      1|3)
+     echo "$NAME is not running!"
+     ;;
+      *)
+     echo "unable to determine status!"
+     ;;
+   esac 
+ }
+ 
+ 
+ 
+ case "$1" in
+     start)    
+     do_start
+         ;;
+     stop)
+     do_stop
+         ;;
+     status)
+     do_status
+     ;;
+     *)
+         echo "Usage: $0 start|stop" >&2
+         exit 3
+         ;;
+ esac
