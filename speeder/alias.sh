@@ -119,3 +119,6 @@ echo "alias '$1'='$2'" >> ~/.bash_aliases
 source ~/.bash_aliases
 echo "" && echo "- Alias added -" && echo ""
 }
+
+alias goup=`sudo proxy.sh up`
+alias goff=`sudo proxy.sh off`

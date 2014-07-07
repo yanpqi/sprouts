@@ -32,3 +32,6 @@ sudo rm -fR /var/lib/apt/lists/*
 sudo mkdir /var/lib/apt/lists/partial  
 # 重新update  
 sudo apt-get update --fix-missing
+
+# sometimes you may incounter a apt error like hash not match, please use this.
+# sudo apt-get -o Acquire::http::proxy="http://127.0.0.1:8087/" update
