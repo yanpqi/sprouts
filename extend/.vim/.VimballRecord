@@ -1,0 +1,1 @@
+tagbar.vba: call delete('/home/foxfs/.vim/README.md')|call delete('/home/foxfs/.vim/autoload/tagbar.vim')|call delete('/home/foxfs/.vim/doc/tagbar.txt')|call delete('/home/foxfs/.vim/plugin/tagbar.vim')|call delete('/home/foxfs/.vim/syntax/tagbar.vim')
